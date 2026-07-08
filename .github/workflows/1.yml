@@ -3,12 +3,11 @@ name: Step 1
 on:
   issue_comment:
     types: [created] 
-      
 
 permissions:
   contents: read
   actions: write
-  issues: write
+  issues: write # <-- esto es clave
 
 env:
   STEP_2_FILE: ".github/steps/2-step.md"
@@ -43,6 +42,10 @@ jobs:
     name: Post next step content
     needs: [check_keywords, find_exercise]
     runs-on: ubuntu-latest
+    permissions: # <-- agrega esto aquí también
+      contents: read
+      actions: write
+      issues: write
     env:
       ISSUE_REPOSITORY: ${{ github.repository }}
       ISSUE_NUMBER: ${{ needs.find_exercise.outputs.issue-number }}
@@ -86,4 +89,4 @@ jobs:
           gh workflow disable "${{github.workflow}}"
           gh workflow enable "Step 2"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # <-- con permissions: issues:write esto ya funciona
