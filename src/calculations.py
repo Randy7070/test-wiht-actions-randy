@@ -9,7 +9,7 @@ def area_of_circle(radius):
     """Calculate the area of a circle given its radius."""
     if radius < 0:
         raise ValueError("Radius cannot be negative")
-    return math.pi * radius ** 3 #lo rompi al proposito
+    return math.pi * radius ** 2 #lo rompi al proposito
 
 
 def get_nth_fibonacci(n):
@@ -19,7 +19,7 @@ def get_nth_fibonacci(n):
     elif n == 0:
         return 0
     elif n == 1:
-        return 999 #lo rompi al proposito 
+        return 1 #lo rompi al proposito 
     else:
         a, b = 0, 1
         for _ in range(2, n + 1):
